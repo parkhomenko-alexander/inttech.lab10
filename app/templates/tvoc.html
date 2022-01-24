@@ -1,0 +1,94 @@
+{%extends "header.html"%}
+{% block nav_content %}
+
+<li class="nav-item">
+    <a href="{{url_for('show_chart_co')}}" class="nav-link waves-effect">CO2</a>
+</li>
+<li class="nav-item active">
+    <a href="#" class="nav-link waves-effect">TVOC</a>
+</li>
+<li class="nav-item">
+    <a href="{{url_for('index')}}" class=" nav-link waves-effect">Просмотр параметров
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<!-- jQuery -->
+<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="../static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="../static/js/mdb.min.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript"></script>
+<script>
+    window.onload = function () {
+
+        var dataPoints = [];
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            title: {
+                text: "TVOC"
+            },
+            axisY: {
+                titleFontColor: "#4F81BC",
+                includeZero: true,
+                suffix: "ppb",
+                minimum: 90,
+                maximum: 100
+            },
+            axisX: {
+                minimum: 0
+            },
+            data: [{
+                type: "splineArea",
+                color: "rgba(54,158,173,.7)",
+                indexLabelFontColor: "darkSlateGray",
+                name: "views",
+                dataPoints: dataPoints
+            }]
+        });
+        var xValue = 0;
+        var newDataCount = -1;
+
+        updateData();
+
+        function addData(data) {
+            dataPoints.push({ x: data[0][0], y: parseInt(data[0][1]) });
+            xValue++;
+            newDataCount++;
+
+            chart.render();
+            setTimeout(updateData, 1000);
+        }
+
+        function updateData() {
+            $.getJSON("http://157.230.191.9:8085/get_data_tvoc/" + newDataCount, addData);
+        }
+
+    }
+</script>
+</head>
+
+
+<body>
+    <div id="chartContainer" class="co2">
+        <div class="card">
+            <div class="card-body">
+                <canvas id="myCharrt"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+
+
+</body>
+
+</html>
+{% endblock %}

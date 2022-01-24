@@ -1,0 +1,80 @@
+.paginator-wrapper {
+    margin: 50px auto 20px auto;
+    display: block;
+    width: 70%;
+}
+
+.paginator {
+    margin-bottom: 40px;
+}
+
+.paginator-with-chart {
+    margin: 500px auto 0 auto;
+}
+
+.paginator__list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.paginator__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.paginator__item p {
+    justify-content: center;
+    display: flex;
+    width: 25%;
+    height: 25px;
+    margin: 0;
+}
+
+.paginator__item input[type="checkbox"] {
+    justify-content: center;
+    display: flex;
+    width: 25%;
+    height: 15px;
+}
+
+.paginator__switcher {
+    display: flex;
+    justify-content: center;
+}
+
+.switch__item {
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2196f3;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.switch__item_disabled {
+    display: none;
+}
+
+.switch__item_delimer {
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2196f3;
+    border-radius: 5px;
+}
+
+.switch__item_selected {
+    background-color: #9ccffc;
+}
+
+.switch__item:hover {
+    background-color: #5eb0f3;
+}

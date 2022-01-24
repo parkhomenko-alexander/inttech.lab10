@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="grey lighten-3">
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light white scrolling-navbar">
+			<div class="container">
+			<a href="#" class="navbar-brand waves-effect"><strong class="blue-text">ESP8266</strong></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="
+			#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle 
+			navigation"
+			><span class="navbar-toggler-icon"></span></button>
+			
+			<div class="collapse navbar-collapse" id="navbarContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a href="#" class="nav-link waves-effect">CO2</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link waves-effect">TVOC</a>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+	</header>
+	
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+  <script>
+window.onload = function() {
+
+var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	
+	title: {
+		text: "CO2"
+	},
+	axisY: {
+		titleFontColor: "#4F81BC",
+		includeZero: true,
+		suffix: ""
+	},
+	data: [{
+		indexLabelFontColor: "darkSlateGray",
+		name: "views",
+		type: "area",
+		
+		dataPoints: dataPoints
+	}]
+});
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+
+function addData(data) {
+	if(newDataCount != 1) {
+		$.each(data, function(key, value) {
+			dataPoints.push({x: value[0], y: parseInt(value[1])});
+			xValue++;
+			yValue = parseInt(value[1]);
+		});
+	} else {
+		//dataPoints.shift();
+		dataPoints.push({x: data[0][0], y: parseInt(data[0][1])});
+		xValue++;
+		yValue = parseInt(data[0][1]);
+	}
+	
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, 400);
+}
+
+function updateData() {
+	$.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart="+xValue+"&ystart="+yValue+"&length="+newDataCount+"type=json", addData);
+}
+
+}
+</script>
+</head>
+
+
+	<body>
+		<div id="chartContainer" class="co2" margin= 5px auto>
+			<div class="card">
+				<div class="card-body">
+					<canvas id="myCharrt"></canvas>
+				</div>
+			</div>
+		</div>
+	<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+	</body>		
+		
+
+
+	
+</body>
+</html>

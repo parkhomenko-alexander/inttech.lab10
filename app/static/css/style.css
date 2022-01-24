@@ -1,0 +1,14 @@
+.navbar-light .navbar-brand {
+    border-radius: 5%;
+    color: rgba(0, 0, 0, .9);
+}
+
+.co2 {
+    margin: 18vh auto;
+    flex: 0 91.666667%;
+    max-width: 91.666667%;
+}
+
+.navbar .nav-item .nav-link {
+    border-radius: 5%;
+}

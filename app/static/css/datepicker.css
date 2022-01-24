@@ -1,0 +1,56 @@
+.datepicker {
+    display: block;
+    margin: 60px 0;
+}
+
+.datepicker__dates {
+    display: flex;
+}
+
+.datepicker__dates>p {
+    margin: 0 auto;
+}
+
+.datepicker__dates input {
+    font-family: "Roboto", sans-serif;
+    background-color: #eee !important;
+    padding: 15px;
+    border: 2px solid rgb(184, 182, 182) !important;
+    border-color: beige;
+}
+
+.datepicker__button {
+    display: flex;
+    margin: 0 auto;
+    width: 150px;
+    height: 60px;
+    align-items: center;
+    background-color: #2196f3 !important;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+.datepicker__radio {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    width: min-content;
+}
+
+.datepicker__radio>label {
+    margin: 0;
+    padding: 10px;
+    width: max-content;
+}
+
+.datepicker__radio input {
+    height: 20px;
+    width: 20px;
+}
+
+.datepicker__buttons {
+    display: flex;
+}
